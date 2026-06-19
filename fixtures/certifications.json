@@ -1,0 +1,9 @@
+[
+  {"model": "wines.certification", "pk": 1, "fields": {"name": "Orgánico",                    "abbreviation": "ORG"}},
+  {"model": "wines.certification", "pk": 2, "fields": {"name": "Biodinámico",                 "abbreviation": "BIO"}},
+  {"model": "wines.certification", "pk": 3, "fields": {"name": "Denominación de Origen",      "abbreviation": "DO"}},
+  {"model": "wines.certification", "pk": 4, "fields": {"name": "Sin Sulfitos Añadidos",       "abbreviation": "S/SO2"}},
+  {"model": "wines.certification", "pk": 5, "fields": {"name": "Vegano",                      "abbreviation": "VEG"}},
+  {"model": "wines.certification", "pk": 6, "fields": {"name": "Natural",                     "abbreviation": "NAT"}},
+  {"model": "wines.certification", "pk": 7, "fields": {"name": "Producción Sostenible",       "abbreviation": "SUST"}}
+]

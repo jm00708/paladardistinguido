@@ -1,0 +1,44 @@
+.register {
+  gap: var(--space-6);
+  justify-content: center;
+}
+
+.register__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.register__headline {
+  font-size: var(--text-3xl);
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.register__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.register__divider { margin: var(--space-2) 0; }
+
+.register__success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+  max-width: 280px;
+}
+
+.register__success h2 {
+  font-size: var(--text-2xl);
+  font-weight: 300;
+}
+
+.register__error {
+  color: #e07070;
+  font-size: var(--text-sm);
+  text-align: center;
+}

@@ -1,0 +1,113 @@
+# ── El Paladar Distinguido — Entorno de desarrollo ──────────────────────────
+# Uso: docker compose up --build
+
+services:
+
+  # ── PostgreSQL ─────────────────────────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       paladar
+      POSTGRES_USER:     paladar
+      POSTGRES_PASSWORD: paladar_dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"   # expuesto para conectar con DBeaver / psql localmente
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U paladar"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── Redis ──────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # ── Backend Django ─────────────────────────────────────────────────────────
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    restart: unless-stopped
+    volumes:
+      - .:/app               # hot-reload del código Python
+      - media_data:/app/media
+    ports:
+      - "8001:8000"
+    env_file: .env
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.development
+      DB_HOST:     db
+      DB_NAME:     paladar
+      DB_USER:     paladar
+      DB_PASSWORD: paladar_dev
+      DB_PORT:     "5432"
+      REDIS_URL:           redis://redis:6379/0
+      CELERY_BROKER_URL:   redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # ── Celery Worker ──────────────────────────────────────────────────────────
+  celery:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    restart: unless-stopped
+    command: celery -A config worker --loglevel=info --concurrency=2
+    volumes:
+      - .:/app
+    env_file: .env
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.development
+      DB_HOST:     db
+      DB_NAME:     paladar
+      DB_USER:     paladar
+      DB_PASSWORD: paladar_dev
+      DB_PORT:     "5432"
+      REDIS_URL:           redis://redis:6379/0
+      CELERY_BROKER_URL:   redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  # ── Frontend React / Vite ─────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app       # hot-reload con HMR
+      - frontend_modules:/app/node_modules   # evita sobreescribir node_modules del host
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_PROXY_TARGET: http://backend:8000
+      VITE_TENANT_HOST: noma.localhost
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  media_data:
+  frontend_modules:

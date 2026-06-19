@@ -1,0 +1,69 @@
+/* ── El Paladar Distinguido — Design Tokens ─────────────────────────────── */
+/* Concepto: "Encuadernado" — cuaderno de catas del sommelier, íntimo y editorial */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root {
+  /* Colores */
+  --color-bg:          #2A2118;   /* pergamino oscuro — fondo principal */
+  --color-bg-raised:   #332A1F;   /* cards y superficies elevadas */
+  --color-bg-overlay:  #1E1710;   /* overlays y fondos más profundos */
+
+  --color-accent:      #7A1F2E;   /* vino tinto — acento principal */
+  --color-accent-dim:  #5C1722;   /* acento más oscuro para hover/active */
+  --color-accent-soft: rgba(122, 31, 46, 0.15); /* acento como relleno suave */
+
+  --color-text:        #EDE4D3;   /* crema cálida — texto principal */
+  --color-text-muted:  #C4A882;   /* beige dorado — texto secundario */
+  --color-text-faint:  rgba(237, 228, 211, 0.40); /* texto muy sutil */
+
+  --color-line:        rgba(196, 168, 130, 0.20); /* separadores */
+  --color-line-strong: rgba(196, 168, 130, 0.45);
+
+  /* Tipografía */
+  --font-display: 'Cormorant Garamond', Georgia, serif;  /* títulos */
+  --font-body:    'Lora', Georgia, serif;                 /* cuerpo y UI */
+
+  /* Tamaños tipográficos */
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.375rem;  /* 22px */
+  --text-2xl:  1.75rem;   /* 28px */
+  --text-3xl:  2.25rem;   /* 36px */
+  --text-4xl:  3rem;      /* 48px */
+
+  /* Espaciado */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Bordes */
+  --radius-sm: 3px;
+  --radius:    6px;
+  --radius-lg: 12px;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+
+  /* Transiciones */
+  --transition-fast:   150ms ease;
+  --transition-base:   300ms ease;
+  --transition-slow:   500ms ease;
+  --transition-page:   400ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Layout */
+  --max-width: 440px;
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}

@@ -1,0 +1,13 @@
+[
+  {"model": "wines.foodcategory", "pk": 1,  "fields": {"name": "Carnes rojas",          "slug": "carnes-rojas"}},
+  {"model": "wines.foodcategory", "pk": 2,  "fields": {"name": "Carnes blancas",         "slug": "carnes-blancas"}},
+  {"model": "wines.foodcategory", "pk": 3,  "fields": {"name": "Pescados",               "slug": "pescados"}},
+  {"model": "wines.foodcategory", "pk": 4,  "fields": {"name": "Mariscos",               "slug": "mariscos"}},
+  {"model": "wines.foodcategory", "pk": 5,  "fields": {"name": "Pasta y arroces",        "slug": "pasta-arroces"}},
+  {"model": "wines.foodcategory", "pk": 6,  "fields": {"name": "Quesos",                 "slug": "quesos"}},
+  {"model": "wines.foodcategory", "pk": 7,  "fields": {"name": "Caza y estofados",       "slug": "caza-estofados"}},
+  {"model": "wines.foodcategory", "pk": 8,  "fields": {"name": "Vegetariano y verduras", "slug": "vegetariano"}},
+  {"model": "wines.foodcategory", "pk": 9,  "fields": {"name": "Postres",                "slug": "postres"}},
+  {"model": "wines.foodcategory", "pk": 10, "fields": {"name": "Embutidos y charcutería","slug": "embutidos"}},
+  {"model": "wines.foodcategory", "pk": 11, "fields": {"name": "Cocina japonesa / asiática", "slug": "asiatica"}}
+]

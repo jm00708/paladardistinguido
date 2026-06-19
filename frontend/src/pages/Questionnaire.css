@@ -1,0 +1,70 @@
+.questionnaire { gap: var(--space-6); }
+
+.questionnaire__progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.questionnaire__progress .progress-track { flex: 1; }
+
+.questionnaire__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  animation: fadeUp 0.35s ease forwards;
+}
+
+.questionnaire__title {
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.questionnaire__subtitle { font-size: var(--text-base); }
+
+.questionnaire__slider-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+}
+
+.questionnaire__slider-labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.questionnaire__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.questionnaire__option {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  text-align: left;
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+  width: 100%;
+}
+
+.questionnaire__option:hover { border-color: var(--color-line-strong); }
+.questionnaire__option.card--selected { border-color: var(--color-accent); background: var(--color-accent-soft); }
+
+.questionnaire__option-label {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--color-text);
+}
+
+.questionnaire__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

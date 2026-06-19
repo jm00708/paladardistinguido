@@ -1,0 +1,98 @@
+.profile {
+  padding: var(--space-6) var(--space-5) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.profile__hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+}
+
+.profile__hero-icon {
+  font-size: 4rem;
+  color: var(--color-accent);
+  line-height: 1;
+  display: block;
+}
+
+.profile__type-name {
+  font-size: var(--text-3xl);
+  line-height: 1.2;
+}
+
+.profile__type-desc {
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  max-width: 28ch;
+  text-align: center;
+}
+
+.profile__identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.profile__handle {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+.profile__stats {
+  display: flex;
+  gap: var(--space-8);
+}
+
+.profile__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.profile__stat-value {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.profile__questionnaire-cta {
+  margin-top: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border: 1px dashed rgba(196, 168, 130, 0.4);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-accent);
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: border-color 0.2s;
+  letter-spacing: 0.04em;
+}
+.profile__questionnaire-cta:hover { border-style: solid; }
+
+.profile__sensory {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.profile__sensory-label {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.profile__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}

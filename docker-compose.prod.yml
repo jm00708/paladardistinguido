@@ -1,0 +1,44 @@
+# ── El Paladar Distinguido — Entorno de producción ──────────────────────────
+# Uso: docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+services:
+
+  db:
+    ports: []   # no exponer PostgreSQL en producción
+
+  redis:
+    ports: []   # no exponer Redis en producción
+
+  backend:
+    build:
+      target: production
+    restart: always
+    ports: []   # no se expone al host; el frontend lo alcanza vía red interna de Docker (backend:8000)
+    volumes:
+      - media_data:/app/media
+      # sin bind-mount de código fuente en producción
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.production
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 60
+
+  celery:
+    build:
+      target: production
+    restart: always
+    command: celery -A config worker --loglevel=warning --concurrency=4
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: production
+    restart: always
+    ports:
+      - "127.0.0.1:8082:80"   # solo accesible desde el nginx del host (reverse proxy existente)
+    volumes: []   # sin bind-mount en producción
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:
+  media_data:
