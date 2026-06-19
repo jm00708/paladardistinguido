@@ -4,20 +4,20 @@
 services:
 
   db:
-    ports: []   # no exponer PostgreSQL en producción
+    ports: !override []   # no exponer PostgreSQL en producción (!override reemplaza, no concatena)
     environment:
       POSTGRES_DB:       ${DB_NAME}
       POSTGRES_USER:     ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
 
   redis:
-    ports: []   # no exponer Redis en producción
+    ports: !override []   # no exponer Redis en producción
 
   backend:
     build:
       target: production
     restart: always
-    ports: []   # no se expone al host; el frontend lo alcanza vía red interna de Docker (backend:8000)
+    ports: !override []   # no se expone al host; el frontend lo alcanza vía red interna de Docker (backend:8000)
     volumes:
       - media_data:/app/media
       # sin bind-mount de código fuente en producción
@@ -41,7 +41,7 @@ services:
       dockerfile: Dockerfile
       target: production
     restart: always
-    ports:
+    ports: !override
       - "127.0.0.1:8082:80"   # solo accesible desde el nginx del host (reverse proxy existente)
     volumes:
       - media_data:/media:ro   # sirve /media/ directo, sin pasar por gunicorn
