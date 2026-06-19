@@ -43,11 +43,18 @@ services:
       target: production
     restart: always
     ports: !override
-      - "127.0.0.1:8082:80"   # solo accesible desde el nginx del host (reverse proxy existente)
+      - "127.0.0.1:8082:80"   # solo para debug manual desde el VPS (curl local); el proxy real lo alcanza por la red compartida
     volumes: !override
       - media_data:/media:ro   # sirve /media/ directo, sin pasar por gunicorn
+    networks:
+      - default
+      - plataforma_default   # permite que plataforma-nginx-1 (el reverse proxy real) lo alcance por nombre
     depends_on:
       - backend
+
+networks:
+  plataforma_default:
+    external: true   # red ya creada por el stack de "plataforma"; no la administra este compose
 
 volumes:
   postgres_data:
