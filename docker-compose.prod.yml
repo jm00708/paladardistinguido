@@ -18,9 +18,9 @@ services:
       target: production
     restart: always
     ports: !override []   # no se expone al host; el frontend lo alcanza vía red interna de Docker (backend:8000)
-    volumes:
+    volumes: !override
       - media_data:/app/media
-      # sin bind-mount de código fuente en producción
+      # !override evita que sobreviva el bind-mount de código fuente del compose base
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.production
       DB_PASSWORD: ${DB_PASSWORD}
@@ -30,6 +30,7 @@ services:
     build:
       target: production
     restart: always
+    volumes: !override []   # sin bind-mount de código fuente en producción
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.production
       DB_PASSWORD: ${DB_PASSWORD}
@@ -43,7 +44,7 @@ services:
     restart: always
     ports: !override
       - "127.0.0.1:8082:80"   # solo accesible desde el nginx del host (reverse proxy existente)
-    volumes:
+    volumes: !override
       - media_data:/media:ro   # sirve /media/ directo, sin pasar por gunicorn
     depends_on:
       - backend
