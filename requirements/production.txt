@@ -1,5 +1,4 @@
 -r base.txt
 gunicorn==23.*
-django-storages[s3]==1.14.*
-boto3==1.35.*
+whitenoise==6.*
 sentry-sdk[django]==2.*

@@ -5,6 +5,10 @@ services:
 
   db:
     ports: []   # no exponer PostgreSQL en producción
+    environment:
+      POSTGRES_DB:       ${DB_NAME}
+      POSTGRES_USER:     ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
 
   redis:
     ports: []   # no exponer Redis en producción
@@ -19,12 +23,16 @@ services:
       # sin bind-mount de código fuente en producción
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.production
+      DB_PASSWORD: ${DB_PASSWORD}
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 60
 
   celery:
     build:
       target: production
     restart: always
+    environment:
+      DJANGO_SETTINGS_MODULE: config.settings.production
+      DB_PASSWORD: ${DB_PASSWORD}
     command: celery -A config worker --loglevel=warning --concurrency=4
 
   frontend:
@@ -35,7 +43,8 @@ services:
     restart: always
     ports:
       - "127.0.0.1:8082:80"   # solo accesible desde el nginx del host (reverse proxy existente)
-    volumes: []   # sin bind-mount en producción
+    volumes:
+      - media_data:/media:ro   # sirve /media/ directo, sin pasar por gunicorn
     depends_on:
       - backend
 
