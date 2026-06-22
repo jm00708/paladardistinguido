@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { partnerLogin } from '../../api/partner'
 import usePartnerStore from '../../store/usePartnerStore'
-import { IconDiamond } from './icons'
+import WineCellarHero from './WineCellarHero'
 import './Partner.css'
 
 export default function PartnerLogin() {
@@ -37,12 +37,12 @@ export default function PartnerLogin() {
   return (
     <div className="partner-root partner-login-page">
       <div className="partner-login-card">
+        <div className="partner-login-card__hero">
+          <WineCellarHero />
+        </div>
         <div className="partner-login-card__brand">
-          <span className="partner-login-card__brand-icon"><IconDiamond width={18} height={18} /></span>
-          <span className="partner-login-card__brand-text">
-            <span className="partner-login-card__brand-main">El Paladar Distinguido</span>
-            <span className="partner-login-card__brand-sub">PORTAL DEL ALIADO</span>
-          </span>
+          <span className="partner-login-card__brand-main">El Paladar Distinguido</span>
+          <span className="partner-login-card__brand-sub">PORTAL DEL ALIADO</span>
         </div>
 
         <div className="partner-login-card__panel">
