@@ -24,8 +24,25 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        // 'html' fuera de globPatterns: el index.html NO se precachea.
+        // Los JS/CSS si tienen hash de contenido (Vite), por eso son
+        // seguros con CacheFirst -- un deploy nuevo genera nombres nuevos.
+        globPatterns: ['**/*.{js,css,ico,png,svg,woff2}'],
         runtimeCaching: [
+          {
+            // El documento HTML siempre se pide a la red primero. Antes,
+            // al precachearse, un F5 normal podia servir una version
+            // vieja del shell (con referencias a JS/CSS tambien viejos)
+            // hasta una segunda recarga. Con NetworkFirst, un refresh
+            // normal ya trae lo ultimo mientras haya conexion; solo cae
+            // a cache si no hay red.
+            urlPattern: ({ request }) => request.mode === 'navigate',
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'pages',
+              networkTimeoutSeconds: 3,
+            },
+          },
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com/,
             handler: 'CacheFirst',
