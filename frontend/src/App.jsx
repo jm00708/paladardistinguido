@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import ThemeSwitcher from './components/ThemeSwitcher'
+import UpdateToast from './components/UpdateToast'
 
 /* ── Consumer PWA ─── */
 import Welcome from './pages/Welcome'
@@ -70,6 +71,9 @@ export default function App() {
 
       {/* ThemeSwitcher sólo en el PWA del comensal */}
       {!isPartnerRoute && <ThemeSwitcher />}
+
+      {/* Aviso de actualización — visible en toda la app */}
+      <UpdateToast />
     </>
   )
 }

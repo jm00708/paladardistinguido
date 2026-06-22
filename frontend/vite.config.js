@@ -7,6 +7,7 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      injectRegister: false, // se registra a mano en UpdateToast.jsx para poder avisar al usuario
       includeAssets: ['favicon.ico', 'icons/*.png'],
       manifest: {
         name: 'El Paladar Distinguido',
