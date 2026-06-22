@@ -17,7 +17,7 @@
 }
 
 .btn:active { transform: scale(0.98); }
-.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn:disabled { cursor: not-allowed; }
 .btn:disabled:active { transform: none; }
 
 /* Sizes */
@@ -30,10 +30,26 @@
 /* Variants */
 .btn--primary {
   background: var(--color-accent);
-  color: var(--color-text);
+  /* --color-on-accent (no --color-text): el texto general se calibra contra
+     --color-bg, no contra --color-accent. En temas con acento claro
+     (dorados, verdes, rosas) usar --color-text deja el texto del botón
+     casi ilegible — cada tema define su propio --color-on-accent con
+     contraste garantizado. */
+  color: var(--color-on-accent);
+  font-weight: 600;
+  border: 1.5px solid transparent;
 }
 .btn--primary:hover:not(:disabled) {
   background: var(--color-accent-dim);
+}
+.btn--primary:disabled {
+  /* La opacidad sola se pierde en temas claros (el acento se diluye contra
+     el fondo); se agrega un borde siempre visible para mantener la forma
+     del botón perceptible aunque aún no esté habilitado. */
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border-color: var(--color-line-strong);
+  opacity: 1;
 }
 
 .btn--ghost {
@@ -45,6 +61,9 @@
   color: var(--color-text);
   border-color: var(--color-text-muted);
 }
+.btn--ghost:disabled { opacity: 0.45; }
+
+.btn--text:disabled { opacity: 0.45; }
 
 .btn--text {
   background: transparent;

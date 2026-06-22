@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from 'react'
 import { getInventory, updateInventoryItem } from '../../api/partner'
+import { IconSearch, IconPencil, IconCheck, IconX } from './icons'
 import './Partner.css'
 
 const WINE_TYPE_LABELS = {
@@ -79,6 +80,7 @@ function InventoryRow({ item, onUpdate }) {
             value={glass}
             onChange={e => setGlass(e.target.value)}
             placeholder="—"
+            autoFocus
           />
         ) : (
           <span>{fmt(item.price_glass)}</span>
@@ -113,15 +115,17 @@ function InventoryRow({ item, onUpdate }) {
         {editing ? (
           <div style={{ display: 'flex', gap: 6 }}>
             <button className="p-btn p-btn--primary" onClick={handleSave} disabled={saving}>
-              {saving ? '…' : 'Guardar'}
+              <IconCheck width={13} height={13} />
+              {saving ? 'Guardando…' : 'Guardar'}
             </button>
             <button className="p-btn p-btn--secondary" onClick={handleCancel} disabled={saving}>
-              Cancelar
+              <IconX width={13} height={13} />
             </button>
           </div>
         ) : (
           <button className="p-btn p-btn--secondary" onClick={() => setEditing(true)}>
-            ✎ Editar
+            <IconPencil width={13} height={13} />
+            Editar
           </button>
         )}
       </td>
@@ -163,19 +167,24 @@ export default function PartnerInventory() {
 
   return (
     <div>
+      <div className="p-page-header">
+        <h1 className="p-page-header__title">Gestión de Inventario</h1>
+        <p className="p-page-header__sub">Disponibilidad y precios de tu carta de vinos</p>
+      </div>
+
       {/* Summary row */}
-      <div className="p-kpi-grid" style={{ gridTemplateColumns: 'repeat(3, auto)', justifyContent: 'start' }}>
-        <div className="p-kpi" style={{ minWidth: 150 }}>
+      <div className="p-kpi-grid" style={{ gridTemplateColumns: 'repeat(3, minmax(150px, 220px))' }}>
+        <div className="p-kpi">
           <p className="p-kpi__label">Total en carta</p>
-          <p className="p-kpi__value">{items.length}</p>
+          <p className="p-kpi__value" style={{ marginTop: 10 }}>{items.length}</p>
         </div>
-        <div className="p-kpi" style={{ minWidth: 150 }}>
+        <div className="p-kpi">
           <p className="p-kpi__label">Disponibles</p>
-          <p className="p-kpi__value p-kpi__value--success">{available}</p>
+          <p className="p-kpi__value" style={{ marginTop: 10, color: 'var(--p-success)' }}>{available}</p>
         </div>
-        <div className="p-kpi" style={{ minWidth: 150 }}>
+        <div className="p-kpi">
           <p className="p-kpi__label">No disponibles</p>
-          <p className="p-kpi__value">{items.length - available}</p>
+          <p className="p-kpi__value" style={{ marginTop: 10 }}>{items.length - available}</p>
         </div>
       </div>
 
@@ -183,7 +192,7 @@ export default function PartnerInventory() {
         <div className="p-card-header">
           <span className="p-card-header__title">Carta de vinos</span>
           <div className="p-search">
-            <span className="p-search__icon">⌕</span>
+            <span className="p-search__icon"><IconSearch width={15} height={15} /></span>
             <input
               className="p-search__input"
               placeholder="Buscar vino o bodega…"
@@ -208,8 +217,10 @@ export default function PartnerInventory() {
             <tbody>
               {filtered.length === 0 ? (
                 <tr>
-                  <td colSpan={6} style={{ textAlign: 'center', padding: 32, color: 'var(--p-text-muted)' }}>
-                    {search ? 'Sin resultados para tu búsqueda.' : 'No hay vinos en el inventario.'}
+                  <td colSpan={6}>
+                    <div className="p-empty">
+                      {search ? 'Sin resultados para tu búsqueda.' : 'No hay vinos en el inventario.'}
+                    </div>
                   </td>
                 </tr>
               ) : (

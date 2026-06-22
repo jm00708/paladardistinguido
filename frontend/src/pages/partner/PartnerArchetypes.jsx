@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getArchetypeInsights } from '../../api/partner'
+import { IconUsers, IconSparkle, IconDiamond } from './icons'
 import './Partner.css'
 
 /* ── Distribution bar row ──────────────────────────────────── */
@@ -65,16 +66,27 @@ export default function PartnerArchetypes() {
 
   return (
     <div>
+      <div className="p-page-header">
+        <h1 className="p-page-header__title">Insights de Arquetipos</h1>
+        <p className="p-page-header__sub">Perfil sensorial de tus comensales</p>
+      </div>
+
       {/* Summary KPIs */}
       <div className="p-kpi-grid">
         <div className="p-kpi">
-          <p className="p-kpi__label">Comensales con perfil</p>
-          <p className="p-kpi__value p-kpi__value--accent">{total}</p>
+          <div className="p-kpi__top">
+            <p className="p-kpi__label">Comensales con perfil</p>
+            <span className="p-kpi__icon"><IconUsers width={15} height={15} /></span>
+          </div>
+          <p className="p-kpi__value">{total}</p>
           <p className="p-kpi__detail">Han completado el cuestionario sensorial</p>
         </div>
         <div className="p-kpi">
-          <p className="p-kpi__label">Arquetipo dominante</p>
-          <p className="p-kpi__value" style={{ fontSize: 22 }}>
+          <div className="p-kpi__top">
+            <p className="p-kpi__label">Arquetipo dominante</p>
+            <span className="p-kpi__icon p-kpi__icon--success"><IconSparkle width={15} height={15} /></span>
+          </div>
+          <p className="p-kpi__value" style={{ fontSize: 19 }}>
             {topArchetype ? `${topArchetype.icon} ${topArchetype.name}` : '—'}
           </p>
           {topArchetype && (
@@ -84,7 +96,10 @@ export default function PartnerArchetypes() {
           )}
         </div>
         <div className="p-kpi">
-          <p className="p-kpi__label">Arquetipos presentes</p>
+          <div className="p-kpi__top">
+            <p className="p-kpi__label">Arquetipos presentes</p>
+            <span className="p-kpi__icon p-kpi__icon--blue"><IconDiamond width={15} height={15} /></span>
+          </div>
           <p className="p-kpi__value">{archetypes.length}</p>
           <p className="p-kpi__detail">De 8 posibles perfiles de paladar</p>
         </div>
@@ -122,7 +137,6 @@ export default function PartnerArchetypes() {
       ) : (
         <div className="p-card">
           <div className="p-empty">
-            <p style={{ fontSize: 32, opacity: 0.2, marginBottom: 12 }}>◈</p>
             <p>Aún no hay comensales con perfil sensorial completo.</p>
             <p style={{ marginTop: 8 }}>
               Los arquetipos se construyen a medida que los comensales completan

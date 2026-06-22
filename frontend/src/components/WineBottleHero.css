@@ -1,0 +1,125 @@
+/* ── Escena de la botella ────────────────────────────────────────────────── */
+.bottle-hero {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.bottle-hero__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible; /* el corcho sale del viewBox al volar */
+}
+
+.bottle-hero__shadow {
+  fill: rgba(0, 0, 0, 0.35);
+  filter: blur(4px);
+}
+
+/* ── Vidrio / cuerpo ──────────────────────────────────────────────────────── */
+.bottle-hero__glass {
+  opacity: 0.96;
+}
+
+.bottle-hero__shine {
+  stroke: var(--color-text);
+  stroke-width: 2.5;
+  opacity: 0.12;
+}
+
+.bottle-hero__foil {
+  opacity: 0.92;
+}
+
+.bottle-hero__mouth {
+  fill: var(--color-bg-overlay);
+}
+
+.bottle-hero__label {
+  fill: var(--color-text);
+  opacity: 0.95;
+}
+
+.bottle-hero__label-mark {
+  stroke: var(--color-accent);
+  fill: var(--color-accent);
+  stroke-width: 1;
+  opacity: 0.75;
+  transform: translate(0, 0);
+}
+
+/* ── Corcho ───────────────────────────────────────────────────────────────── */
+.bottle-hero__cork-body {
+  fill: #d9b383;
+  stroke: #a8794f;
+  stroke-width: 1;
+}
+
+.bottle-hero__cork-top {
+  fill: #c9a36c;
+}
+
+.bottle-hero__cork-line {
+  stroke: #a8794f;
+  stroke-width: 0.8;
+  opacity: 0.5;
+}
+
+.bottle-hero__cork {
+  transform-origin: 100px 60px;
+}
+
+/* ── Destello del "pop" ───────────────────────────────────────────────────── */
+.bottle-hero__burst {
+  opacity: 0;
+  transform-origin: 100px 92px;
+}
+
+.bottle-hero__burst-ray {
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+  opacity: 0.85;
+}
+
+/* ── Entrada de la escena (siempre se anima, es sutil) ───────────────────── */
+.bottle-hero {
+  animation: bottleHeroIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes bottleHeroIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── El "pop" del corcho — solo si el usuario admite movimiento ──────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .bottle-hero__cork {
+    animation: corkPop 0.85s cubic-bezier(0.32, 1, 0.4, 1) 0.55s both;
+  }
+
+  .bottle-hero__burst {
+    animation: burstPop 0.45s ease-out 0.85s both;
+  }
+
+  @keyframes corkPop {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    14%  { transform: translate(-1.5px, 1px) rotate(-5deg); }
+    28%  { transform: translate(1.5px, 0) rotate(4deg); }
+    55%  { transform: translate(4px, -52px) rotate(22deg); opacity: 1; }
+    80%  { transform: translate(9px, -88px) rotate(42deg); opacity: 1; }
+    100% { transform: translate(13px, -108px) rotate(54deg); opacity: 0; }
+  }
+
+  @keyframes burstPop {
+    0%   { opacity: 0; transform: scale(0.4); }
+    35%  { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.7); }
+  }
+}
+
+/* ── Sin animación: la botella se muestra cerrada, en reposo ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bottle-hero { animation: none; opacity: 1; transform: none; }
+}

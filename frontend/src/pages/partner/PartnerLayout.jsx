@@ -1,11 +1,12 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import usePartnerStore from '../../store/usePartnerStore'
+import { IconGrid, IconBottle, IconSparkle, IconLogout, IconDiamond } from './icons'
 import './Partner.css'
 
 const NAV = [
-  { to: '/aliado/dashboard',   label: 'Dashboard',   icon: '▦' },
-  { to: '/aliado/inventario',  label: 'Inventario',  icon: '▤' },
-  { to: '/aliado/arquetipos',  label: 'Arquetipos',  icon: '◈' },
+  { to: '/aliado/dashboard',   label: 'Dashboard',   Icon: IconGrid },
+  { to: '/aliado/inventario',  label: 'Inventario',  Icon: IconBottle },
+  { to: '/aliado/arquetipos',  label: 'Arquetipos',  Icon: IconSparkle },
 ]
 
 const PAGE_TITLES = {
@@ -34,7 +35,7 @@ export default function PartnerLayout() {
         <aside className="partner-sidebar">
           <div className="partner-sidebar__brand">
             <span className="partner-sidebar__logo">
-              <em className="partner-sidebar__logo-icon">◈</em>
+              <span className="partner-sidebar__logo-icon"><IconDiamond width={16} height={16} /></span>
               <span className="partner-sidebar__logo-text">
                 <span className="partner-sidebar__logo-main">El Paladar</span>
                 <span className="partner-sidebar__logo-sub">Portal Aliado</span>
@@ -45,7 +46,7 @@ export default function PartnerLayout() {
           <nav className="partner-sidebar__nav">
             <div className="partner-nav-group">
               <p className="partner-nav-group__label">Menú</p>
-              {NAV.map(({ to, label, icon }) => (
+              {NAV.map(({ to, label, Icon }) => (
                 <NavLink
                   key={to}
                   to={to}
@@ -53,7 +54,7 @@ export default function PartnerLayout() {
                     'partner-nav-link' + (isActive ? ' active' : '')
                   }
                 >
-                  <span className="partner-nav-link__icon">{icon}</span>
+                  <span className="partner-nav-link__icon"><Icon /></span>
                   {label}
                 </NavLink>
               ))}
@@ -66,7 +67,8 @@ export default function PartnerLayout() {
               <span className="partner-sidebar__user-email">{email || 'Aliado'}</span>
             </div>
             <button className="partner-logout-btn" onClick={handleLogout}>
-              ↩ Cerrar sesión
+              <IconLogout width={15} height={15} />
+              Cerrar sesión
             </button>
           </div>
         </aside>
@@ -76,7 +78,10 @@ export default function PartnerLayout() {
           <header className="partner-topbar">
             <span className="partner-topbar__title">{pageTitle}</span>
             <div className="partner-topbar__right">
-              <span className="partner-topbar__badge">◈ Restaurante</span>
+              <span className="partner-topbar__badge">
+                <span className="partner-topbar__badge-dot" />
+                Restaurante Test1
+              </span>
             </div>
           </header>
 

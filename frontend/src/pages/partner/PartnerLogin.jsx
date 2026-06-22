@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { partnerLogin } from '../../api/partner'
 import usePartnerStore from '../../store/usePartnerStore'
+import { IconDiamond } from './icons'
 import './Partner.css'
 
 export default function PartnerLogin() {
@@ -36,22 +37,23 @@ export default function PartnerLogin() {
   return (
     <div className="partner-root partner-login-page">
       <div className="partner-login-card">
-        <div className="partner-login-card__header">
-          <div className="partner-login-card__logo">◈</div>
-          <h1 className="partner-login-card__title">El Paladar Distinguido</h1>
-          <p className="partner-login-card__subtitle">Portal del Aliado</p>
+        <div className="partner-login-card__brand">
+          <span className="partner-login-card__brand-icon"><IconDiamond width={18} height={18} /></span>
+          <span className="partner-login-card__brand-text">
+            <span className="partner-login-card__brand-main">El Paladar Distinguido</span>
+            <span className="partner-login-card__brand-sub">PORTAL DEL ALIADO</span>
+          </span>
         </div>
 
-        <div className="partner-login-card__body">
-          {error && (
-            <div className="p-alert p-alert--error">{error}</div>
-          )}
+        <div className="partner-login-card__panel">
+          <h1 className="partner-login-card__title">Inicia sesión</h1>
+          <p className="partner-login-card__subtitle">Accede al panel de tu restaurante</p>
+
+          {error && <div className="p-alert p-alert--error">{error}</div>}
 
           <form onSubmit={handleSubmit}>
             <div className="p-form-group">
-              <label className="p-form-label" htmlFor="email">
-                Correo electrónico
-              </label>
+              <label className="p-form-label" htmlFor="email">Correo electrónico</label>
               <input
                 id="email"
                 type="email"
@@ -65,9 +67,7 @@ export default function PartnerLogin() {
             </div>
 
             <div className="p-form-group">
-              <label className="p-form-label" htmlFor="password">
-                Contraseña
-              </label>
+              <label className="p-form-label" htmlFor="password">Contraseña</label>
               <input
                 id="password"
                 type="password"
@@ -88,11 +88,9 @@ export default function PartnerLogin() {
               {loading ? 'Verificando…' : 'Iniciar sesión'}
             </button>
           </form>
-
-          <p className="partner-login-hint">
-            Acceso exclusivo para personal del restaurante
-          </p>
         </div>
+
+        <p className="partner-login-hint">Acceso exclusivo para personal del restaurante</p>
       </div>
     </div>
   )

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { Logo, OrnamentDivider } from '../components/ui/Ornament'
+import { OrnamentDivider } from '../components/ui/Ornament'
 import Button from '../components/ui/Button'
+import WineBottleHero from '../components/WineBottleHero'
 import { initSession, createGuest } from '../api/session'
 import useDinerStore from '../store/useDinerStore'
 import './Welcome.css'
@@ -45,11 +46,13 @@ export default function Welcome() {
 
   return (
     <div className="page page-centered welcome animate-fade-in">
-      <div className="welcome__top">
-        <Logo size="lg" />
+      <div className="welcome__hero">
+        <WineBottleHero />
+        <div className="welcome__brand">
+          <p className="welcome__brand-main serif">El Paladar</p>
+          <p className="welcome__brand-sub serif">Distinguido</p>
+        </div>
       </div>
-
-      <OrnamentDivider />
 
       <div className="welcome__meta">
         {restaurant && (

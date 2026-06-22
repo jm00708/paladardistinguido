@@ -45,3 +45,12 @@ htmlcov/
 node_modules/
 dist/
 .parcel-cache/
+
+# Secretos / material local sensible — NUNCA va al repo
+certs/
+*.pem
+*.key
+Privatekey.txt
+
+# Configuracion local de Claude Code (skills, no es codigo del proyecto)
+.claude/

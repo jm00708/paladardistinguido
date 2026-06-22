@@ -12,6 +12,7 @@
   --color-accent:      #7A1F2E;   /* vino tinto — acento principal */
   --color-accent-dim:  #5C1722;   /* acento más oscuro para hover/active */
   --color-accent-soft: rgba(122, 31, 46, 0.15); /* acento como relleno suave */
+  --color-on-accent:   #EDE4D3;   /* texto/iconos sobre fondos de acento (botones) — contraste garantizado, no usar --color-text aquí */
 
   --color-text:        #EDE4D3;   /* crema cálida — texto principal */
   --color-text-muted:  #C4A882;   /* beige dorado — texto secundario */
