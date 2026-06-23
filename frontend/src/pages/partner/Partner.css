@@ -854,10 +854,12 @@
 /* ── Login page ────────────────────────────────────────────── */
 .partner-login-page {
   min-height: 100vh;
-  background: #fafafa;
   background-image:
-    radial-gradient(circle at 0% 0%, rgba(183,135,58,0.06) 0%, transparent 45%),
-    radial-gradient(circle at 100% 100%, rgba(11,14,20,0.04) 0%, transparent 45%);
+    linear-gradient(180deg, rgba(10,8,6,0.5) 0%, rgba(10,8,6,0.72) 100%),
+    url('../../assets/cava-login.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -870,7 +872,7 @@
 }
 
 .partner-login-card__hero {
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 
 .partner-login-card__brand {
@@ -883,17 +885,19 @@
 }
 
 .partner-login-card__brand-main {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
-  color: var(--p-text);
+  color: #fdfaf5;
   letter-spacing: -0.01em;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
 }
 
 .partner-login-card__brand-sub {
   font-size: 11px;
-  color: var(--p-text-faint);
-  letter-spacing: 0.06em;
-  margin-top: 2px;
+  color: rgba(253,250,245,0.7);
+  letter-spacing: 0.08em;
+  margin-top: 3px;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
 }
 
 .partner-login-card__panel {
@@ -968,6 +972,7 @@
 .partner-login-hint {
   text-align: center;
   font-size: 12px;
-  color: var(--p-text-faint);
+  color: rgba(253,250,245,0.6);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
   margin-top: 18px;
 }

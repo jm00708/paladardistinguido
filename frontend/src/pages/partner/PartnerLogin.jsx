@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { partnerLogin } from '../../api/partner'
 import usePartnerStore from '../../store/usePartnerStore'
-import WineCellarHero from './WineCellarHero'
+import WineBottleBadge from './WineBottleBadge'
 import './Partner.css'
 
 export default function PartnerLogin() {
@@ -38,7 +38,7 @@ export default function PartnerLogin() {
     <div className="partner-root partner-login-page">
       <div className="partner-login-card">
         <div className="partner-login-card__hero">
-          <WineCellarHero />
+          <WineBottleBadge />
         </div>
         <div className="partner-login-card__brand">
           <span className="partner-login-card__brand-main">El Paladar Distinguido</span>
