@@ -1,0 +1,94 @@
+.glass-badge {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: glassBadgeIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes glassBadgeIn {
+  from { opacity: 0; transform: scale(0.85) translateY(8px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.glass-badge__svg {
+  width: 48px;
+  height: 80px;
+  overflow: visible;
+}
+
+/* ── Copa ─────────────────────────────────────────────────────────────── */
+.glass-badge__outline {
+  fill: rgba(122, 31, 46, 0.04);
+  stroke: rgba(60, 40, 30, 0.45);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+
+.glass-badge__rim {
+  fill: none;
+  stroke: rgba(60, 40, 30, 0.35);
+  stroke-width: 1.2;
+}
+
+.glass-badge__stem {
+  fill: rgba(60, 40, 30, 0.4);
+}
+
+.glass-badge__base {
+  fill: rgba(60, 40, 30, 0.35);
+}
+
+/* ── Vino tinto ───────────────────────────────────────────────────────── */
+.glass-badge__wine {
+  fill: #8a1f30;
+  opacity: 0.92;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  transform: scaleY(1); /* estado de reposo: copa ya llena */
+}
+
+/* ── Burbujas ─────────────────────────────────────────────────────────── */
+.glass-badge__bubble {
+  fill: rgba(255, 235, 225, 0.8);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .glass-badge__wine {
+    animation: wineFillIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+
+  @keyframes wineFillIn {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+  }
+
+  /* Las burbujas arrancan despues de que la copa termina de llenarse,
+     y luego se repiten en loop -- un espumoso real nunca deja de
+     burbujear, asi que detenerlas se veria "sin gas". */
+  .glass-badge__bubble--1 { animation: bubbleRise 2.4s ease-in 1.1s infinite; }
+  .glass-badge__bubble--2 { animation: bubbleRise 2.1s ease-in 1.5s infinite; }
+  .glass-badge__bubble--3 { animation: bubbleRise 2.7s ease-in 0.9s infinite; }
+  .glass-badge__bubble--4 { animation: bubbleRise 2.2s ease-in 1.8s infinite; }
+  .glass-badge__bubble--5 { animation: bubbleRise 2.0s ease-in 1.3s infinite; }
+
+  @keyframes bubbleRise {
+    0%   { transform: translateY(0) scale(0.7); opacity: 0; }
+    12%  { opacity: 0.85; }
+    80%  { opacity: 0.5; }
+    100% { transform: translateY(-22px) scale(1); opacity: 0; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-badge { animation: none; opacity: 1; transform: none; }
+}
